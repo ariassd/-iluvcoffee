@@ -15,22 +15,22 @@ import { Coffee } from './entities/coffee.entity';
 
 @Controller('coffees')
 export class CoffeesController {
-  constructor(private readonly coffeesSv: CoffeesService) {}
+  constructor(private readonly coffeesService: CoffeesService) {}
 
   @Get()
   findAll(/*@Query() paginationQuery: any*/): Promise<Coffee[]> {
     // const { limit, offset } = paginationQuery;
-    return this.coffeesSv.findAll();
+    return this.coffeesService.findAll();
   }
 
   @Get(':id')
   findById(@Param('id') id: string): Promise<Coffee> {
-    return this.coffeesSv.findOne(id);
+    return this.coffeesService.findOne(id);
   }
 
   @Post()
   create(@Body() createCoffeeDto: CreateCoffeeDto): Promise<Coffee> {
-    return this.coffeesSv.create(createCoffeeDto);
+    return this.coffeesService.create(createCoffeeDto);
   }
 
   @Patch(':id')
@@ -38,11 +38,11 @@ export class CoffeesController {
     @Param('id') id: string,
     @Body() updateCoffeeDto: UpdateCoffeeDto,
   ): Promise<Coffee> {
-    return this.coffeesSv.update(id, updateCoffeeDto);
+    return this.coffeesService.update(id, updateCoffeeDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string): Promise<Coffee> {
-    return this.coffeesSv.remove(id);
+    return this.coffeesService.remove(id);
   }
 }
