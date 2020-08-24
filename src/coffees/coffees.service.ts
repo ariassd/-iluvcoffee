@@ -5,6 +5,7 @@ import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { Coffee } from './entities/coffee.entity';
 import { Flavor } from './entities/flavor.entity';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 
 @Injectable()
 export class CoffeesService {
@@ -15,9 +16,12 @@ export class CoffeesService {
     private readonly flavorRepository: Repository<Flavor>,
   ) {}
 
-  findAll(): Promise<Coffee[]> {
+  findAll(paginationQuery: PaginationQueryDto): Promise<Coffee[]> {
+    const { limit, offset } = paginationQuery;
     return this.coffeeRepository.find({
       relations: ['flavors'],
+      skip: offset - 1,
+      take: limit,
     });
   }
 
