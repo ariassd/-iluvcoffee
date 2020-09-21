@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, Inject } from '@nestjs/common';
+import { Injectable, NotFoundException, Inject, Scope } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Connection } from 'typeorm';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
@@ -9,7 +9,7 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Event } from '../events/entities/event.entity';
 import { COFFEE_BRANDS } from './coffees.constants';
 
-@Injectable()
+@Injectable({ scope: Scope.REQUEST }) // 👈 a new instance is created for each request.
 export class CoffeesService {
   constructor(
     @InjectRepository(Coffee)
