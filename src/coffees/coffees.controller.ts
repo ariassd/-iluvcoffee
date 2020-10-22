@@ -13,13 +13,20 @@ import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { Coffee } from './entities/coffee.entity';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
+import { Public } from '../common/decorators/public.decorator';
+import { Protocol } from '../common/decorators/protocol.decorator';
 
 @Controller('coffees')
 export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {}
 
+  @Public()
   @Get()
-  findAll(@Query() paginationQuery: PaginationQueryDto): Promise<Coffee[]> {
+  findAll(
+    @Protocol() protocol: string,
+    @Query() paginationQuery: PaginationQueryDto,
+  ): Promise<Coffee[]> {
+    console.log('protocol decorator:', protocol);
     return this.coffeesService.findAll(paginationQuery);
   }
 

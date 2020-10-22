@@ -42,6 +42,7 @@ DATABASE_PASSWORD=pass123
 DATABASE_NAME=postgres
 DATABASE_PORT=5432
 DATABASE_HOST=localhost
+API_KEY=access-1
 ```
 
 ## Running the app
