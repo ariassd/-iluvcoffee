@@ -15,11 +15,14 @@ import { Coffee } from './entities/coffee.entity';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 import { Public } from '../common/decorators/public.decorator';
 import { Protocol } from '../common/decorators/protocol.decorator';
+import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('coffees')
 @Controller('coffees')
 export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {}
 
+  @ApiForbiddenResponse({ description: 'Forbidden' })
   @Public()
   @Get()
   findAll(

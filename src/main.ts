@@ -5,6 +5,8 @@ import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { ApiKeyGuard } from './common/guards/api-key.guard';
 import { TimeoutInterceptor } from './common/interceptors/timeout.interceptor';
 import { WrapResponseInterceptor } from './common/interceptors/wrap-response.interceptor';
+import { DocumentBuilder } from '@nestjs/swagger/dist/document-builder';
+import { SwaggerModule } from '@nestjs/swagger/dist/swagger-module';
 
 async function bootstrap() {
   const logger = new Logger();
@@ -25,6 +27,15 @@ async function bootstrap() {
     new WrapResponseInterceptor(),
     new TimeoutInterceptor(),
   );
+
+  const options = new DocumentBuilder()
+    .setTitle('Iluvcoffee')
+    .setDescription('Coffee application')
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup('api', app, document);
+
   await app.listen(3000).then(() => logger.verbose(`App listen on 3000`));
 }
 bootstrap();

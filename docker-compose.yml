@@ -5,15 +5,20 @@ services:
     image: postgres
     restart: always
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
-      SET_CONTAINER_TIMEZONE: 'true'
-      TZ: Etc/GMT+6 # America/Costa_Rica
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: pass123
     # volumes:
     #   - ~/Documents/docker/postgres-data:/var/lib/postgresql/data
+  test-db:
+    image: postgres
+    restart: always
+    ports:
+      - "5433:5432" # 👈 Note the 5433 port (since we are using 5432 for our regular db)
+    environment:
+      POSTGRES_PASSWORD: pass123
+
+    
 # docker-compose up -d
 # docker-compose down
 

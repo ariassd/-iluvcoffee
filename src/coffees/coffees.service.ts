@@ -24,10 +24,10 @@ export class CoffeesService {
     @Inject(coffeesConfig.KEY)
     private coffeesConfiguration: ConfigType<typeof coffeesConfig>, // 💡 Optimal / Best-practice 💡
   ) {
-    console.log(coffeeBrands);
+    // console.log(coffeeBrands);
     // const databaseHost = this.configService.get('database.host', 'localhost');
     // console.log('database host', databaseHost);
-    console.log('fully typed config foo ', coffeesConfiguration.foo);
+    // console.log('fully typed config foo ', coffeesConfiguration.foo);
   }
 
   findAll(paginationQuery: PaginationQueryDto): Promise<Coffee[]> {
